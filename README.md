@@ -52,3 +52,5 @@ Como primeira tarefa, vou implementar os seguintes recursos:
 
 ## Licença
 Este projeto é de código aberto. Sinta-se à vontade para contribuir e melhorá-lo!
+
+Qualquer ideia pode entrar em contato comigo pelas redes que tenho no meu perfil!
