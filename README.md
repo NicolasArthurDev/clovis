@@ -1,7 +1,7 @@
 # Projeto Clovis
 
 ## Descrição
-Clovis é um assistente de voz pessoal projetado para facilitar a interação entre humanos e máquinas por meio de comandos de voz. Com capacidade de reconhecimento de voz, síntese de fala e reprodução de áudio diretamente no programa, o Clovis oferece uma experiência intuitiva e prática. Criei ele a partir dos filmes do homem de ferro, pois adoro seu personagem e a criação do Jarvis como seu mordomo.
+Clovis é um assistente de voz pessoal em desenvolvimento projetado para facilitar a interação entre humanos e máquinas por meio de comandos de voz. Com capacidade de reconhecimento de voz, síntese de fala e reprodução de áudio diretamente no programa, o Clovis oferece uma experiência intuitiva e prática. Criei ele a partir dos filmes do homem de ferro, pois adoro seu personagem e a criação do Jarvis como seu mordomo.
 
 ## Funcionalidades
 - **Reconhecimento de Voz**: Interpreta comandos de voz para realizar tarefas.
