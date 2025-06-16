@@ -1,14 +1,16 @@
 from gtts import gTTS
 import pygame
 import os
-from modules.dialogos import Dialogos
+from clovis.memory.dialogues import Dialogue
 
-dialogo = Dialogos()
+class Clovis:
+    def __init__(self):
+        self.dialogo = Dialogue()
 
 # Função para converter texto em áudio
 def converterTextoEmAudio(texto):
     tts = gTTS(text=texto, lang='pt-br')  # Usando o argumento texto
-    tts.save("modules/temp/resposta.mp3")  # Salvando o áudio
+    tts.save("clovis/memory/temp/answer.mp3")  # Salvando o áudio
     reproduzirAudio()
 
 def printarTexto(texto):
@@ -20,22 +22,24 @@ def printarTexto(texto):
 def reproduzirAudio():
     # Inicializando o pygame mixer para reprodução de áudio
     pygame.mixer.init()
-    pygame.mixer.music.load("modules/temp/resposta.mp3")  # Carregando o arquivo de áudio
+    pygame.mixer.music.load("clovis/memory/temp/answer.mp3")  # Carregando o arquivo de áudio
     pygame.mixer.music.play()  # Reproduzindo o áudio
 
 os.system('clear')
 print("Iniciando projeto Clovis...\n\n")
 
-texto = dialogo.interacaoInicial()
+clovis = Clovis()  # Crie a instância
+
+texto = clovis.dialogo.interacaoInicial()
 printarTexto(texto)
 while True:
     userText = input().lower()
 
     if userText.lower() == "sair":
-        texto = dialogo.interacaoFinal()
+        texto = clovis.dialogo.interacaoFinal()
         printarTexto(texto)
         break
     else:
-        texto = dialogo.perguntasERespostas(userText)
+        texto = clovis.dialogo.perguntasERespostas(userText)
         printarTexto(texto)
 

@@ -1,9 +1,6 @@
-class Dialogos:
-
-    
-
+class Dialogue:
     def __init__(self, text="", userText=""):
-        self.userText = userText
+        self.userText = userText.lower()
         self.text = text
 
     def set_text(self, text):
