@@ -13,6 +13,9 @@
 # KDE directory preferences
 .directory
 
+# Temporary files
+answer.mp3
+
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
@@ -248,3 +251,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,visualstudiocode,linux,windows,dotenv
+

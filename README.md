@@ -92,7 +92,7 @@ clovis/
 ### 1. Criar ambiente virtual
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate  # Linux/macOS
 .venv\Scripts\activate     # Windows
 ````
@@ -106,7 +106,7 @@ pip install -r requirements.txt
 ### 3. Executar o assistente
 
 ```bash
-python clovis/main.py
+python3 clovis/main.py
 ```
 
 ### 4. Rodar os notebooks
