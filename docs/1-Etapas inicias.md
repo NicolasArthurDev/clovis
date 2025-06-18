@@ -29,3 +29,9 @@ https://www.youtube.com/watch?v=X1IpNUs1PV8
 
 ### Criando seu 1° Projeto de PLN - Processamento de Linguagem Natural
 https://www.youtube.com/watch?v=ky3nFU9zm8A
+
+### Local and Open Source Speech to Speech Assistant
+https://www.youtube.com/watch?v=xu-8hLOAI94
+
+### Build a Streamlit Chatbot
+https://www.youtube.com/watch?v=sBhK-2K9bUc

@@ -145,3 +145,14 @@ Este projeto é de código aberto. Sinta-se à vontade para contribuir e melhor�
 5. MemoryManager que salva num JSON
 6. Prototipar tudo isso no experimento_nlp.ipynb
 7. Só depois pensar em integrar uma LLM com API
+
+## Etapas para Construção de um Modelo de NLP com Python
+
+Criar um modelo de NLP envolve um pipeline de etapas fundamentais:
+
+1. Coleta de dados textuais
+2. Limpeza e pré-processamento dos textos
+3. Tokenização e vetorizacão
+4. Treinamento de modelo
+5. Avaliação de desempenho
+6. Implantação e inferência
