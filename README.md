@@ -23,7 +23,6 @@ Criei ele inspirado nos filmes do Homem de Ferro, pois adoro seu personagem e a 
 ## Estrutura do Projeto
 
 ```
-
 clovis/
 ├── .venv/                         ← Ambiente virtual
 ├── clovis/                        ← Código-fonte e Pacote principal da aplicação
@@ -50,6 +49,9 @@ clovis/
 │   └── utils/                     ← Funções auxiliares e comuns a vários módulos
 │       └── helpers.py
 │
+├── app/                           ← Interface web com Streamlit
+│   └── streamlit_app.py           ← Página do chatbot Clovis
+│
 ├── tests/                         ← Testes automatizados
 │   ├── agent/
 │   ├── nlp/
@@ -65,9 +67,9 @@ clovis/
 ├── .env                           ← Variáveis de ambiente (API Keys, etc)
 ├── .gitignore
 ├── requirements.txt
+├── setup.py                       ← Instalação do pacote em modo desenvolvimento
 └── README.md
-
-````
+```
 
 ---
 
@@ -78,6 +80,7 @@ clovis/
   - `SpeechRecognition` – Reconhecimento de voz
   - `gTTS` – Síntese de voz
   - `pygame` – Reprodução de áudio
+  - `streamlit` – Interface web
 - **Para NLP**:
   - `nltk`, `transformers` (opcional para uso de LLMs via API)
 - **Para persistência e testes**:
@@ -95,7 +98,7 @@ clovis/
 python3 -m venv .venv
 source .venv/bin/activate  # Linux/macOS
 .venv\Scripts\activate     # Windows
-````
+```
 
 ### 2. Instalar dependências
 
@@ -103,13 +106,37 @@ source .venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
 ```
 
-### 3. Executar o assistente
+### 3. Instalar o pacote localmente (modo desenvolvimento)
+
+Para garantir que o pacote `clovis` seja encontrado corretamente em toda a aplicação (inclusive pelo Streamlit), instale-o em modo editável:
+
+```bash
+pip install -e .
+```
+
+---
+
+## Como Executar
+
+### 1. Rodar o assistente no terminal
 
 ```bash
 python3 clovis/main.py
 ```
 
-### 4. Rodar os notebooks
+### 2. Rodar a interface web (chatbot) com Streamlit
+
+Sempre execute a partir da raiz do projeto:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+Se preferir, você pode acessar a aplicação pelo navegador no endereço exibido pelo Streamlit (geralmente http://localhost:8501).
+
+---
+
+### 3. Rodar os notebooks
 
 ```bash
 jupyter notebook
