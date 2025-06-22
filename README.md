@@ -1,10 +1,82 @@
 # Projeto Clovis
 
-## Descrição
-
 Clovis é um assistente de voz pessoal em desenvolvimento, projetado para facilitar a interação entre humanos e máquinas por meio de comandos de voz e linguagem natural. Com capacidade de reconhecimento de voz, síntese de fala, memória e reprodução de áudio diretamente no programa, o Clovis oferece uma experiência intuitiva e prática.
 
 Criei ele inspirado nos filmes do Homem de Ferro, pois adoro seu personagem e a criação do J.A.R.V.I.S como seu mordomo pessoal.
+
+## Como rodar o Clovis
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/clovis.git
+cd clovis
+```
+
+### 2. Crie e ative o ambiente virtual
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # Linux/macOS
+# ou
+.venv\Scripts\activate     # Windows
+```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Instale o pacote Clovis em modo desenvolvimento
+
+```bash
+pip install -e .
+```
+
+### 5. (Opcional) Configure variáveis de ambiente
+
+Se necessário, crie um arquivo `.env` com suas configurações (ex: chaves de API).
+
+### 6. Inicie o modelo LLM local (exemplo: Ollama)
+
+Certifique-se de que o modelo (ex: Gemma) está rodando localmente, por exemplo:
+
+```bash
+ollama run gemma:2b
+```
+
+### 7. Rode o assistente no terminal
+
+```bash
+python3 clovis/main.py
+```
+
+### 8. Rode a interface web (chatbot) com Streamlit
+
+Sempre execute a partir da raiz do projeto:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+Acesse pelo navegador em [http://localhost:8501](http://localhost:8501).
+
+---
+
+### 9. (Opcional) Rode os notebooks para prototipagem
+
+```bash
+jupyter notebook
+```
+
+---
+
+## Dicas
+
+- Para personalizar o comportamento do Clovis, edite o `system_prompt` em `clovis/nlp/response_generator.py`.
+- Para adicionar novas funcionalidades, crie módulos em `clovis/tools/` ou `clovis/agent/`.
+- Para testes, utilize a pasta `tests/`.
 
 ---
 
@@ -87,60 +159,6 @@ clovis/
   - `json`, `unittest`, `pytest`
 - **Ambiente Virtual**:
   - `venv` (nativo do Python)
-
----
-
-## Como Começar
-
-### 1. Criar ambiente virtual
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate  # Linux/macOS
-.venv\Scripts\activate     # Windows
-```
-
-### 2. Instalar dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Instalar o pacote localmente (modo desenvolvimento)
-
-Para garantir que o pacote `clovis` seja encontrado corretamente em toda a aplicação (inclusive pelo Streamlit), instale-o em modo editável:
-
-```bash
-pip install -e .
-```
-
----
-
-## Como Executar
-
-### 1. Rodar o assistente no terminal
-
-```bash
-python3 clovis/main.py
-```
-
-### 2. Rodar a interface web (chatbot) com Streamlit
-
-Sempre execute a partir da raiz do projeto:
-
-```bash
-streamlit run app/streamlit_app.py
-```
-
-Se preferir, você pode acessar a aplicação pelo navegador no endereço exibido pelo Streamlit (geralmente http://localhost:8501).
-
----
-
-### 3. Rodar os notebooks
-
-```bash
-jupyter notebook
-```
 
 ---
 
