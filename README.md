@@ -38,21 +38,19 @@ pip install -e .
 
 Se necessário, crie um arquivo `.env` com suas configurações (ex: chaves de API).
 
-### 6. Inicie o modelo LLM local (exemplo: Ollama)
+### 6. Baixe e inicie o modelo Mistral localmente
 
-Certifique-se de que o modelo (ex: Gemma) está rodando localmente, por exemplo:
-
-```bash
-ollama run gemma:2b
-```
-
-### 7. Rode o assistente no terminal
+O Clovis utiliza o **Mistral LLM** rodando via [Ollama](https://ollama.com/). Instale o Ollama e baixe o modelo Mistral:
 
 ```bash
-python3 clovis/main.py
+# Instale o Ollama conforme a documentação oficial
+ollama pull mistral
+ollama run mistral
 ```
 
-### 8. Rode a interface web (chatbot) com Streamlit
+> **Importante:** O modelo precisa estar rodando em `localhost:11434` para o chat funcionar.
+
+### 7. Inicie a interface web (chatbot) com Streamlit
 
 Sempre execute a partir da raiz do projeto:
 
@@ -61,14 +59,6 @@ streamlit run app/streamlit_app.py
 ```
 
 Acesse pelo navegador em [http://localhost:8501](http://localhost:8501).
-
----
-
-### 9. (Opcional) Rode os notebooks para prototipagem
-
-```bash
-jupyter notebook
-```
 
 ---
 
