@@ -1,35 +1,87 @@
 import requests
+import json
+import streamlit as st
 
-system_prompt = """
-Você é CLOVIS, um assistente virtual capaz de responder perguntas e ajudar usuários com informações úteis.
-Você deve responder de forma clara, objetiva e amigável, sempre buscando fornecer a melhor resposta possível.
-Responda apenas à última pergunta do usuário, usando o contexto anterior apenas como referência.
-Nunca repita perguntas ou respostas anteriores.
-Se não souber a resposta, diga que não sabe e que ainda está aprendendo.
-Quando você não entender uma pergunta, diga que não entendeu e peça para o usuário reformular a pergunta.
-Você não deve dar saudação inicial quando o usuário iniciar uma conversa e não deve dar saudação em respostas subsequentes.
+def set_name(nome: str, pronomes: str):
+    if pronomes.lower() == "ele/dele":
+        nome_usuario = f"Senhor {nome}"
+    elif pronomes.lower() == "ela/dela":
+        nome_usuario = f"Senhora {nome}"
+    else:
+        nome_usuario = nome
+    return nome_usuario
+
+# Essa função é para rodar no streamlit_app para obtermos o nome do usuário e o agente poder se referir a ele corretamente
+def set_name_system_prompt(nome: str, pronomes: str):
+    nome_usuario = set_name(nome, pronomes)
+    return f"""
+Você é Clovis, um mordomo virtual que responde com gentileza, formalidade e objetividade.
+
+Trate o usuário com respeito e sempre se refira a ele como "{nome_usuario}". Na maioria das vezes, responda o usuário chamando ele apenas com a senioridade.
+Nunca use saudações desnecessárias.
+Se não souber uma resposta, diga que ainda está aprendendo.
+
+Seja direto, educado e útil em todas as respostas.
 """
 
-def format_messages(messages, system=system_prompt):
-    formatted = [f"system: {system.strip()}"]
+# Formata mensagens no estilo de chat normal
+
+def format_messages(messages, system: str, modelo="mistral"):
+    formatted = ""
+    # Só inclui o system_prompt se for a primeira mensagem
+    if not messages or messages[0]["role"] != "system":
+        formatted += f"system: {system.strip()}\n\n"
     for m in messages:
-        formatted.append(f"{m['role']}: {m['content']}")
-    return "\n".join(formatted)
+        role = "user" if m["role"] == "user" else "assistant"
+        formatted += f"{role}: {m['content'].strip()}\n"
+    formatted += "assistant:"
+    return formatted.strip()
 
-
-def get_llm_response(prompt: str, modelo: str = "gemma:2b", system: str = system_prompt, messages = None) -> str:
+# Streaming (resposta em tempo real)
+def stream_llm_response(prompt: str, system: str, modelo: str = "mistral", messages=None):
     url = "http://localhost:11434/api/generate"
     if messages is None:
         messages = []
-    # Adiciona o novo prompt ao histórico
+
     full_history = messages + [{"role": "user", "content": prompt}]
-    prompt_final = format_messages(full_history, system=system)
+    prompt_final = format_messages(full_history, system=system, modelo=modelo, )
+
     payload = {
         "model": modelo,
         "prompt": prompt_final,
-        "stream": False,
-        "system": system
+        "stream": True
     }
+
+    try:
+        response = requests.post(url, json=payload, stream=True)
+        response.raise_for_status()
+
+        for line in response.iter_lines():
+            if line:
+                data = json.loads(line.decode("utf-8"))
+                if "response" in data:
+                    yield data["response"]
+
+    except requests.RequestException as e:
+        print(f"[Erro Ollama - stream] {e}")
+        yield "Erro ao se comunicar com o modelo local."
+
+
+# Versão tradicional (resposta completa) stream = false
+def get_llm_response(prompt: str, system: str, modelo: str = "mistral", messages=None) -> str:
+    url = "http://localhost:11434/api/generate"
+    if messages is None:
+        messages = []
+
+    full_history = messages + [{"role": "user", "content": prompt}]
+    prompt_final = format_messages(full_history, system=system, modelo=modelo)
+
+    payload = {
+        "model": modelo,
+        "prompt": prompt_final,
+        "stream": False
+    }
+
     try:
         response = requests.post(url, json=payload)
         response.raise_for_status()
